@@ -22,4 +22,8 @@ public interface UserDaoInterface {
 
 	boolean findEmail(String email);
 
+	boolean checkUserByEmail(String email);
+
+	User getUserByEmail(String email);
+
 }

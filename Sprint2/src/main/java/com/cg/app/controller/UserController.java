@@ -1,6 +1,5 @@
 package com.cg.app.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +27,10 @@ public class UserController {
 		User use= userServiceInterface.signUp(user);
 		return new ResponseEntity<User>(use, HttpStatus.OK);		
 	}
-	@GetMapping("/login")
-    public ResponseEntity<List<User>> login( User user) throws UserException {
-		List<User> use = userServiceInterface.login();
-		return new ResponseEntity<List<User>>(use, HttpStatus.OK);
+	@GetMapping("/login/{email}/{password}")
+	public ResponseEntity<Integer> login(@PathVariable("email") String email,@PathVariable("password") String password) throws UserException{
+		Integer userId=userServiceInterface.loginUser(email, password);
+		return new ResponseEntity<Integer>(userId,HttpStatus.OK);
 	}
 	@GetMapping("/delUser/{id}")
 	public ResponseEntity<Boolean> delUser(@PathVariable("id") int id) throws UserException {
@@ -64,4 +63,5 @@ public class UserController {
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
+	
 }

@@ -80,4 +80,22 @@ public class UserDao implements UserDaoInterface {
 		}
 		return false;
 	}
+	 @Override
+	   	public boolean checkUserByEmail(String email){
+	   		String Qstr="SELECT user.email FROM User user WHERE user.email= :email";
+	   		TypedQuery<String> query=entityManager.createQuery(Qstr,String.class).setParameter("email",email);
+	   		try{
+	   			query.getSingleResult();
+	   		}
+	   		catch(Exception ex){
+	   			return false;
+	   		}
+	   		return true;
+	   	}
+		@Override 
+		public User getUserByEmail(String email){
+			String Qstr="SELECT user FROM User user WHERE user.email= :email";
+	   		TypedQuery<User> query=entityManager.createQuery(Qstr,User.class).setParameter("email",email);
+	   		return query.getSingleResult();
+		}
 }

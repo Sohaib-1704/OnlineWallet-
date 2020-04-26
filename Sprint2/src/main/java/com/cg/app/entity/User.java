@@ -1,13 +1,13 @@
 package com.cg.app.entity;
 
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 @Entity
@@ -18,35 +18,40 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name = "email", unique=true)
+	@Column(name = "email", unique=true,length=50)
     @NotBlank(message = "Email is mandatory")
 	private String email;
 	
-	@Column(name = "firstname")
+	@Column(name = "firstname",length=25)
     @NotBlank(message = "Firstname is mandatory")
 	private String firstname;
 	
-	@Column(name = "lastname")
+	@Column(name = "lastname",length=25)
     @NotBlank(message = "Lastname is mandatory")
 	private String lastname;
 	
-	@Column(name = "password")
+	@Column(name = "password",length=50)
     @NotBlank(message = "Password is mandatory")
 	private String password;
  
-	@Column(name = "confimrPassword")
+	@Column(name = "confimrPassword",length=50)
     @NotBlank(message = "ConfirmPassword is mandatory")
 	private String confirmPassword;
 	
-	@Column(name = "phoneNumber")
+	@Column(name = "phoneNumber",length=10)
     @NotBlank(message = "PhoneNumber is mandatory")
 	private String phoneNumber;
 	
-	@Column(name = "active")
+	@Column(name = "active",length=1)
 	private int active;
 	
-	@ManyToMany      
-	private Set<Role> roles;
+	public enum type{admin,user};
+	@Enumerated(EnumType.STRING)
+	private type userType=type.user;
+	
+	public enum login{loggedIn,LoggedOut};
+	@Enumerated(EnumType.STRING)
+	private login loginStatus=login.LoggedOut;
 	
 	public User() {
 		
@@ -111,10 +116,16 @@ public class User {
 	public void setActive(int active) {
 		this.active = active;
 	}
-	public Set<Role> getRoles() {
-		return roles;
-	}	
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}	
+	public type getUserType() {
+		return userType;
+	}
+	public void setUserType(type userType) {
+		this.userType = userType;
+	}
+	public login getLoginStatus() {
+		return loginStatus;
+	}
+	public void setLoginStatus(login loginStatus) {
+		this.loginStatus = loginStatus;
+	}
 }

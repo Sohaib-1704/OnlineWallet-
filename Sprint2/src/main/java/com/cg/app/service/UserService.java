@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cg.app.dao.UserDaoInterface;
 import com.cg.app.entity.User;
+import com.cg.app.exception.UserException;
 
 @Service("userService")
 public class UserService implements UserServiceInterface {
@@ -46,4 +47,17 @@ public class UserService implements UserServiceInterface {
 	public boolean existsByEmail(String email) {
 		return userDaoInterface.findEmail(email);
 	}
+	@Override
+    public Integer loginUser(String email, String password) throws UserException{   
+    	if(userDaoInterface.checkUserByEmail(email)==false)
+    		throw new UserException("The entered User does not exist, Please enter a valid email");
+    	User user=userDaoInterface.getUserByEmail(email);
+//        if(user.getUserType()==type.admin)
+//        	throw new UserException("You are not authorized to login from here");
+    	if(user.getPassword().equals(password)==false)
+    		throw new UserException("The email and password Combination does not match");
+//    	user.setLoginStatus(login0.loggedIn);
+    	return user.getId();
+    		
+    }
 }
