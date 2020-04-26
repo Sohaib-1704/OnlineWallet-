@@ -1,7 +1,5 @@
 package com.cg.app.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -23,11 +21,6 @@ public class UserDao implements UserDaoInterface {
 	public User signUp(User user) {
 		entityManager.persist(user);
 		return user;
-	}
-	@Override
-	public List<User> login() {
-		TypedQuery<User> query=entityManager.createQuery("SELECT user FROM User AS user", User.class);
-		return query.getResultList();
 	}
 	@Override
 	public Boolean delete(int id) {
@@ -57,7 +50,6 @@ public class UserDao implements UserDaoInterface {
 		  userUpdate.getLastname();
 		  userUpdate.getPassword();
 		  userUpdate.getPhoneNumber();
-		  userUpdate.getActive();
 		  entityManager.persist(userUpdate);
 		
 	}
@@ -81,7 +73,7 @@ public class UserDao implements UserDaoInterface {
 		return false;
 	}
 	 @Override
-	   	public boolean checkUserByEmail(String email){
+	   	public boolean findUserByEmail(String email){
 	   		String Qstr="SELECT user.email FROM User user WHERE user.email= :email";
 	   		TypedQuery<String> query=entityManager.createQuery(Qstr,String.class).setParameter("email",email);
 	   		try{
@@ -97,5 +89,10 @@ public class UserDao implements UserDaoInterface {
 			String Qstr="SELECT user FROM User user WHERE user.email= :email";
 	   		TypedQuery<User> query=entityManager.createQuery(Qstr,User.class).setParameter("email",email);
 	   		return query.getSingleResult();
+		}
+		@Override
+		public User getUser(Integer userId){   
+			User user=entityManager.find(User.class, userId);
+	        return user;
 		}
 }

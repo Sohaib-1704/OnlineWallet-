@@ -42,9 +42,6 @@ public class User {
     @NotBlank(message = "PhoneNumber is mandatory")
 	private String phoneNumber;
 	
-	@Column(name = "active",length=1)
-	private int active;
-	
 	public enum type{admin,user};
 	@Enumerated(EnumType.STRING)
 	private type userType=type.user;
@@ -109,12 +106,6 @@ public class User {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-	public int getActive() {
-		return active;
-	}
-	public void setActive(int active) {
-		this.active = active;
 	}
 	public type getUserType() {
 		return userType;

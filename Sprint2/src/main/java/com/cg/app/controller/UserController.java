@@ -63,5 +63,9 @@ public class UserController {
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
-	
+	@PutMapping("/logout/{id}")
+	public ResponseEntity<String> logout(@PathVariable("id") int id){
+		userServiceInterface.logout(id);
+		return new ResponseEntity<String>("Logged Out Successfully",HttpStatus.OK);
+	}
 }

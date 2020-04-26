@@ -1,15 +1,11 @@
 package com.cg.app.dao;
 
-import java.util.List;
-
 import com.cg.app.entity.User;
 
 public interface UserDaoInterface {
 	
 	public User signUp(User user);
 	
-	List<User> login();
-
 	Boolean delete(int id);
 
 	 boolean findId(int id);
@@ -22,8 +18,10 @@ public interface UserDaoInterface {
 
 	boolean findEmail(String email);
 
-	boolean checkUserByEmail(String email);
+	boolean findUserByEmail(String email);
 
 	User getUserByEmail(String email);
+
+	User getUser(Integer userId);
 
 }

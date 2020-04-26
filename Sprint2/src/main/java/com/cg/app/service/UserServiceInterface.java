@@ -1,15 +1,11 @@
 package com.cg.app.service;
 
-import java.util.List;
-
 import com.cg.app.entity.User;
 import com.cg.app.exception.UserException;
 
 public interface UserServiceInterface {
 
-	User signUp(User user);
-
-	public List<User> login();
+	User signUp(User user) throws UserException;
 
 	Boolean delete(int id);
 
@@ -24,6 +20,8 @@ public interface UserServiceInterface {
 	boolean existsByEmail(String email);
 
 	Integer loginUser(String email, String password) throws UserException;
+
+	void logout(Integer userId);
 
 
 }
