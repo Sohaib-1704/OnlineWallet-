@@ -1,6 +1,5 @@
 package com.capgemini.onlineWallet.entities;
 
-
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -11,29 +10,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="transactionsAishwaryas")
+@Table(name="onlinewallettransactions")
 public class WalletTransactions {
 
 	@Id
-	@Column(name="transactionid")
+	@Column(name="transaction_id")
 	private int transactionId;
 	
 	@Column(name="description")
 	private String description;
 	
-	@Column(name="Date")
-	private LocalDate date;
+	@Column(name="dateOfTransaction")
+	private LocalDate dateOfTransaction;
 	
 	@Column(name="amount")
 	private double amount;
 	
-	@Column(name="accountbalance")
+	@Column(name="account_balance")
 	private double accountBalance;
-
-	@ManyToOne
-	@JoinColumn(name="accountid", referencedColumnName="accountid")
-	private WalletAccount acc= new WalletAccount();
 	
+	@ManyToOne
+	@JoinColumn(name="account_id", referencedColumnName="account_id")
+	WalletAccount obj = new WalletAccount();
+
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -50,12 +49,12 @@ public class WalletTransactions {
 		this.description = description;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDate getDateOfTransaction() {
+		return dateOfTransaction;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setDateOfTransaction(LocalDate dateOfTransaction) {
+		this.dateOfTransaction = dateOfTransaction;
 	}
 
 	public double getAmount() {
@@ -74,14 +73,13 @@ public class WalletTransactions {
 		this.accountBalance = accountBalance;
 	}
 
-	public WalletAccount getAcc() {
-		return acc;
+	public WalletAccount getObj() {
+		return obj;
 	}
 
-	public void setAcc(WalletAccount acc) {
-		this.acc = acc;
+	public void setObj(WalletAccount obj) {
+		this.obj = obj;
 	}
-	
 	
 	
 }

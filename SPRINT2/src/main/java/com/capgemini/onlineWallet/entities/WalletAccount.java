@@ -8,22 +8,22 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="AishwaryaAccount")
+@Table(name="onlinewalletaccount")
 public class WalletAccount {
 
 	@Id
-	@Column(name="accountid")
+	@Column(name="account_id")
 	private int accountId;
 	
-	@Column(name="accountbalance")
-	private int accountBalance;
+	@Column(name="account_balance")
+	private double accountBalance;
 	
 	@Column(name="status")
 	private String status;
 	
 	@OneToOne
-	@JoinColumn(name="userid", referencedColumnName="userid")
-	private WalletUser user= new WalletUser();
+	@JoinColumn(name="user_id",referencedColumnName="user_id")
+	WalletUser obj = new WalletUser();
 
 	public int getAccountId() {
 		return accountId;
@@ -33,11 +33,11 @@ public class WalletAccount {
 		this.accountId = accountId;
 	}
 
-	public int getAccountBalance() {
+	public double getAccountBalance() {
 		return accountBalance;
 	}
 
-	public void setAccountBalance(int accountBalance) {
+	public void setAccountBalance(double accountBalance) {
 		this.accountBalance = accountBalance;
 	}
 
@@ -49,15 +49,13 @@ public class WalletAccount {
 		this.status = status;
 	}
 
-	public WalletUser getUser() {
-		return user;
+	public WalletUser getObj() {
+		return obj;
 	}
 
-	public void setUser(WalletUser user) {
-		this.user = user;
+	public void setObj(WalletUser obj) {
+		this.obj = obj;
 	}
-
-
 	
 	
 	

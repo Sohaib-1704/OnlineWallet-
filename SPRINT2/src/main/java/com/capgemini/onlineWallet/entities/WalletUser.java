@@ -1,27 +1,28 @@
 package com.capgemini.onlineWallet.entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "UserDetails")
-public class WalletUser{
+@Table(name="onlinewalletuser")
+public class WalletUser {
+
 	@Id
-	@Column(name="userid")
+	@Column(name="user_id")
 	private int userId;
+	
+	@Column(name="user_name")
+	private String userName;
 	
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="phonenumber")
-	private String privateNumber;
+	@Column(name="phone_number")
+	private String phoneNumber;
 	
-	@Column(name="loginname")
+	@Column(name="login_name")
 	private String loginName;
 
 	public int getUserId() {
@@ -32,6 +33,14 @@ public class WalletUser{
 		this.userId = userId;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -40,12 +49,12 @@ public class WalletUser{
 		this.password = password;
 	}
 
-	public String getPrivateNumber() {
-		return privateNumber;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPrivateNumber(String privateNumber) {
-		this.privateNumber = privateNumber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getLoginName() {
@@ -54,5 +63,9 @@ public class WalletUser{
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
-	}	
+	}
+	
+	
+	
+	
 }
