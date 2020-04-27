@@ -1,5 +1,7 @@
 package com.cg.app.dao;
 
+import java.util.List;
+
 import com.cg.app.entity.User;
 
 public interface UserDaoInterface {
@@ -12,16 +14,15 @@ public interface UserDaoInterface {
 
 	User findById(int id);
 
-	void update(User user);
-
-	User findByEmail(String email);
-
-	boolean findEmail(String email);
-
 	boolean findUserByEmail(String email);
 
 	User getUserByEmail(String email);
 
 	User getUser(Integer userId);
+
+	public List<User> reterive();
+
+	boolean update(User user, int id);
+
 
 }

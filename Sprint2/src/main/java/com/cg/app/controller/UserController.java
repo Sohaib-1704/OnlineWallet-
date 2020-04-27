@@ -1,5 +1,7 @@
 package com.cg.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +30,21 @@ public class UserController {
 		return new ResponseEntity<User>(use, HttpStatus.OK);		
 	}
 	@GetMapping("/login/{email}/{password}")
-	public ResponseEntity<Integer> login(@PathVariable("email") String email,@PathVariable("password") String password) throws UserException{
-		Integer userId=userServiceInterface.loginUser(email, password);
+	public ResponseEntity<User> login(@PathVariable("email") String email,@PathVariable("password") String password) throws UserException{
+		User user=userServiceInterface.loginUser(email, password);
+		return new ResponseEntity<User>(user,HttpStatus.OK);
+	}
+	@GetMapping("/admin/{email}/{password}")
+	public ResponseEntity<Integer> admin(@PathVariable("email") String email,@PathVariable("password") String password) throws UserException{
+		Integer userId=userServiceInterface.loginAdmin(email, password);
 		return new ResponseEntity<Integer>(userId,HttpStatus.OK);
 	}
+	@GetMapping("/getUserDetails")
+    public ResponseEntity<List<User>> getAllUserDetails() {
+			List<User> lstUser = userServiceInterface.findAll();
+			return new ResponseEntity<List<User>>(lstUser,HttpStatus.OK);
+	}
+	
 	@GetMapping("/delUser/{id}")
 	public ResponseEntity<Boolean> delUser(@PathVariable("id") int id) throws UserException {
 		Boolean status = userServiceInterface.delete(id);
@@ -48,12 +61,12 @@ public class UserController {
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
 	@PutMapping("/updateUser/{id}")
-	public ResponseEntity<User> updateUser(@PathVariable("id") int id,@RequestBody User User){
-	    if (userServiceInterface.existsById(id)==false){
-	    	 return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+	public ResponseEntity<User> updateUser(@PathVariable("id") int id,@RequestBody User User) throws UserException{
+	    if (userServiceInterface.existsById(id)){
+		    userServiceInterface.updateData(User,id);
+		    return new ResponseEntity<User>(User,HttpStatus.OK);
 		}
-	    userServiceInterface.updateData(User);
-	    return new ResponseEntity<User>(User,HttpStatus.OK);	
+   	 return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
 	@GetMapping("/getUserByEmail/{email}")
     public ResponseEntity<User> getUserByEmail (@PathVariable("email") String email) {
