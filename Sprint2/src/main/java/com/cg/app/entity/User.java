@@ -44,11 +44,11 @@ public class User {
 	
 	public enum type{admin,user};
 	@Enumerated(EnumType.STRING)
-	private type userType=type.user;
+	private type userType;
 	
-	public enum login{loggedIn,LoggedOut};
+	public enum login{LoggedIn,LoggedOut};
 	@Enumerated(EnumType.STRING)
-	private login loginStatus=login.LoggedOut;
+	private login loginStatus;
 	
 	public User() {
 		

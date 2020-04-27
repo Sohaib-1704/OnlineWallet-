@@ -18,11 +18,19 @@ public interface UserDaoInterface {
 
 	User getUserByEmail(String email);
 
-	User getUser(Integer userId);
+	public List<User> retrieveData();
 
-	public List<User> reterive();
+	boolean updateLoginStatus(User user, int id);
 
-	boolean update(User user, int id);
+	boolean updateFullName(User user, int id);
+
+	boolean updatePassword(User user, int id);
+
+	boolean updatePhoneNumber(User user, int id);
+
+	boolean updateUserToAdmin(User user, int id);
+
+	boolean updateLogoutStatus(User user, String email);
 
 
 }

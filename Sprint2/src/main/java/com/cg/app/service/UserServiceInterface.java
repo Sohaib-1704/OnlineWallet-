@@ -9,25 +9,31 @@ public interface UserServiceInterface {
 
 	User signUp(User user) throws UserException;
 
-	Boolean delete(int id);
+	Boolean delete(int id) throws UserException;
 
-	User findById(int id);
+	User findById(int id) throws UserException;
 
-	boolean existsById(int id);
+	boolean existsById(int id) throws UserException;
 
 	User loginUser(String email, String password) throws UserException;
 
-	void logout(Integer userId);
+	User loginAdmin(String email, String password) throws UserException;
 
-	Integer loginAdmin(String email, String password) throws UserException;
+	boolean existsByEmail(String email) throws UserException;
 
-	List<User> findAll();
+	User findByEmail(String email) throws UserException;
 
-	boolean existsByEmail(String email);
+	String logout(User user, int id) throws UserException;
 
-	User findByEmail(String email);
+	String updatePassword(User user, int id) throws UserException;
 
-	String updateData(User user, int id) throws UserException;
+	String updatePhoneNumber(User user, int id) throws UserException;
+
+	String updateFullName(User user, int id) throws UserException;
+
+	String updateUserToAdmin(User user, int id) throws UserException;
+
+	List<User> getAllUsers();
 
 
 }

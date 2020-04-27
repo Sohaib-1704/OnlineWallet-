@@ -9,7 +9,6 @@ import com.cg.app.dao.UserDaoInterface;
 import com.cg.app.entity.User;
 import com.cg.app.entity.User.type;
 import com.cg.app.exception.UserException;
-import com.cg.app.entity.User.login;
 
 @Service("userService")
 public class UserService implements UserServiceInterface {
@@ -22,6 +21,11 @@ public class UserService implements UserServiceInterface {
 		userDaoInterface.signUp(user);
 		return user;
 	}
+	boolean checkEmail(String email) throws UserException {
+		 if(userDaoInterface.findUserByEmail(email)==true)
+			 throw new UserException("User already exists, please login with your email");
+		else return true;
+	}
 	@Override
     public User loginUser(String email, String password) throws UserException{   
     	if(userDaoInterface.findUserByEmail(email)==false)
@@ -30,63 +34,92 @@ public class UserService implements UserServiceInterface {
         if(user.getUserType()==type.admin)
         	throw new UserException("User login only");
     	if(user.getPassword().equals(password)==false)
-    		throw new UserException("Email or password does not match");
-    	user.setLoginStatus(login.loggedIn);
-    	return user;		
+    		throw new UserException("Email and password does not match");
+    	if (userDaoInterface.updateLogoutStatus(user, email)!=true)
+			throw new UserException("User already LoggedIn");
+		return user;
     }
-	boolean checkEmail(String email) throws UserException {
-		 if(userDaoInterface.findUserByEmail(email)==true)
-			 throw new UserException("User already exists, please login with your email");
-		else return true;
-	}
 	@Override
-    public Integer loginAdmin(String email, String password) throws UserException{   
+    public User loginAdmin(String email, String password) throws UserException{   
     	if(userDaoInterface.findUserByEmail(email)==false)
     		throw new UserException("User does not exist, Please enter a valid email");
     	User user=userDaoInterface.getUserByEmail(email);
         if(user.getUserType()==type.user)
         	throw new UserException("Admin login only");
     	if(user.getPassword().equals(password)==false)
-    		throw new UserException("Email or password does not match");
-    	user.setLoginStatus(login.loggedIn);
-    	return user.getId();		
+    		throw new UserException("Email and password does not match");
+    	if (userDaoInterface.updateLogoutStatus(user, email)!=true)
+			throw new UserException("Admin already LoggedIn");
+    	return user;		
     }
 	@Override
-	public List<User> findAll() {
-		return userDaoInterface.reterive();
+	public List<User> getAllUsers() {
+		return userDaoInterface.retrieveData();
 	}
 	@Override
-	public Boolean delete(int id) {
+	public Boolean delete(int id) throws UserException {
+		if(userDaoInterface.findId(id)==false)
+    		throw new UserException("User does not exist");
 		return userDaoInterface.delete(id);
 	}
 	@Override
-	public User findById(int id) {
+	public User findById(int id) throws UserException {
+		if(userDaoInterface.findId(id)==false)
+    		throw new UserException("User does not exist");
 		return userDaoInterface.findById(id);
 	}
 	@Override
-	public boolean existsById(int id) {
+	public boolean existsById(int id) throws UserException {
+		if(userDaoInterface.findId(id)==false)
+    		throw new UserException("User does not exist");
 		return userDaoInterface.findId(id);
 	}
 	@Override
-	public String updateData(User user, int id) throws UserException {
-		if (userDaoInterface.update(user,id)==true)
-			return "updated";
-		else 
-			throw new UserException("Error");
-	}
-	@Override
-	public User findByEmail(String email) {
+	public User findByEmail(String email) throws UserException {
+		if(userDaoInterface.findUserByEmail(email)==false)
+    		throw new UserException("User does not exist");
 		return userDaoInterface.getUserByEmail(email);
 	}
 	@Override
-	public boolean existsByEmail(String email) {
+	public boolean existsByEmail(String email) throws UserException {
+		if(userDaoInterface.findUserByEmail(email)==false)
+    		throw new UserException("User does not exist");
 		return userDaoInterface.findUserByEmail(email);
 	}
-	
 	@Override
-	public void logout(Integer userId){
-		User user=userDaoInterface.getUser(userId);
-	   	user.setLoginStatus(login.LoggedOut);
+	public String updateFullName(User user, int id) throws UserException {
+		if (userDaoInterface.updateFullName(user,id)==true)
+			return "Name Updated";
+		else 
+			throw new UserException("Error updating Name");
+	}
+	@Override
+	public String updatePassword(User user, int id) throws UserException {
+		if (userDaoInterface.updatePassword(user, id)==true)
+			return "Password Updated";
+		else 
+			throw new UserException("Error updating Password");
+	}
+	@Override
+	public String updatePhoneNumber(User user, int id) throws UserException {
+		if (userDaoInterface.updatePhoneNumber(user, id)==true)
+			return "PhoneNumber Updated";
+		else 
+			throw new UserException("Error updating PhoneNumber");
+	}
+	@Override
+	public String updateUserToAdmin(User user, int id) throws UserException {
+		if (userDaoInterface.updateUserToAdmin(user, id)==true)
+			return " Updated";
+		else 
+			throw new UserException("Error updating PhoneNumber");
+	}
+	@Override
+	public String logout(User user,int id) throws UserException{
+		if (userDaoInterface.updateLoginStatus(user, id)!=true)
+			throw new UserException("User already LoggedOut");
+		else
+			return "LoggedOut";
  	}
 	
 }
