@@ -6,7 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.onlineWallet.Service.OnlineWalletService;
-
+/* ***********************************************************************************
+*          @author         Aishwarya Srivastava
+*          Description      It is a controller class that processes action for 
+*                           processes like addMoney and transferMoney
+*          Version          1.0
+*          Created Date     22-APR-2020
+************************************************************************************/
 @RestController
 public class OnlineWalletController {
 

@@ -10,7 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+/* *************************************************************************************
+ *          @author         Aishwarya Srivastava
+ *          Description      It is a entity class that provides the entities for 
+ *                           wallet user.
+ *          Version          1.0
+ *          Created Date     20-APR-2020
+ ************************************************************************************/
 @Entity
 @Table(name = "WalletUser")
 public class WalletUser {

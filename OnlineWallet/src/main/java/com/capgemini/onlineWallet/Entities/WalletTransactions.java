@@ -11,7 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+/* ***********************************************************************************
+ *          @author          Aishwarya Srivastava
+ *          Description      It is a entity class that provides the entities for 
+ *                           transactions.
+ *          Version          1.0
+ *          Created Date     20-APR-2020
+ ************************************************************************************/
 @Entity
 @Table(name="WalletTransactions")
 public class WalletTransactions {
