@@ -43,11 +43,6 @@ public class ProfileDAOImpl implements ProfileDAO
 	@Override
 	public void update(Profile profile) 
 	{
-		TypedQuery<Profile> query = entityManager.createQuery("update PROFILE set user_name :=? WHERE id:=?",Profile.class);
-		query.setParameter(1,profile.getName());
-		query.setParameter(2, profile.getUserId());
-		query.executeUpdate();
-		
+		entityManager.merge(profile);
 	}
-
 }

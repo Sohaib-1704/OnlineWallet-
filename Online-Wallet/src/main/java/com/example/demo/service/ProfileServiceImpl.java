@@ -45,6 +45,7 @@ public class ProfileServiceImpl implements ProfileService
 	}
 
 	@Override
+	@Transactional
 	public void updateProfie(Profile profile) 
 	{
 		profileDAO.update(profile);

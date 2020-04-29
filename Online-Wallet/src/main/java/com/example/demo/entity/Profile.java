@@ -29,17 +29,15 @@ public class Profile
 		super();
 	}
 
-	public Profile(String name, long phoneNumber,
-								String email, boolean status) 
+	public Profile(int userId, String name, long phoneNumber, String email, boolean status)
 	{
 		super();
-		this.name= name;
+		this.userId = userId;
+		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.status = status;
 	}
-
-
 
 	public int getUserId() {
 		return userId;
@@ -49,44 +47,37 @@ public class Profile
 		this.userId = userId;
 	}
 
-	public String getName() 
-	{
+	public String getName() {
 		return name;
 	}
 
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public long getPhoneNumber()
-	{
+	public long getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(long phoneNumber)
-	{
+	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getEmail() 
-	{
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email)
-	{
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public boolean isStatus() 
-	{
+	public boolean isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) 
-	{
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
+	
 	
 }
