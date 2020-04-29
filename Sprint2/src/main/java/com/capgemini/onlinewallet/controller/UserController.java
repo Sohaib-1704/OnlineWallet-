@@ -15,26 +15,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.onlinewallet.entity.User;
 import com.capgemini.onlinewallet.exception.UserException;
-import com.capgemini.onlinewallet.service.UserServiceInterface;
-
+import com.capgemini.onlinewallet.service.UserService;
+/************************************************************************************
+*          @author          Sohaib Khan
+*          Description      It is a controller class that process action for 
+*          					signUp, login, logout and admin operations like 
+*          					delete, getDetails and updateData etc.  
+*          Version          1.0
+*          Created Date     22-APR-2020
+************************************************************************************/
 @RestController
 public class UserController {
 
 	@Autowired
-	private UserServiceInterface userServiceInterface;
+	private UserService userService;
 
 	@CrossOrigin
 	@PostMapping("/signUp")
 	public ResponseEntity<User> signUp(@RequestBody User user) throws UserException {
-		User use = userServiceInterface.signUp(user);
+		User use = userService.signUp(user);
 		return new ResponseEntity<User>(use, HttpStatus.OK);
 	}
 
 	@GetMapping("/login/{email}/{password}")
 	public ResponseEntity<User> login(@PathVariable("email") String email, @PathVariable("password") String password)
 			throws UserException {
-		if (userServiceInterface.existsByEmail(email)) {
-			User user = userServiceInterface.loginUser(email, password);
+		if (userService.findByEmail(email)!=null) {
+			User user = userService.loginUser(email, password);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -43,38 +50,38 @@ public class UserController {
 	@GetMapping("/admin/{email}/{password}")
 	public ResponseEntity<User> admin(@PathVariable("email") String email, @PathVariable("password") String password)
 			throws UserException {
-		if (userServiceInterface.existsByEmail(email)) {
-			User user = userServiceInterface.loginAdmin(email, password);
+		if (userService.findByEmail(email)!=null) {
+			User user = userService.loginAdmin(email, password);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/getUserDetails")
+	@GetMapping("/getAllUserDetails")
 	public ResponseEntity<List<User>> getAllUserDetails() {
-		List<User> lstUser = userServiceInterface.getAllUsers();
+		List<User> lstUser = userService.getAllUsers();
 		return new ResponseEntity<List<User>>(lstUser, HttpStatus.OK);
 	}
 
 	@GetMapping("/getUserByEmail/{email}")
 	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) throws UserException {
-		if (userServiceInterface.existsByEmail(email)) {
-			User user = userServiceInterface.findByEmail(email);
+		if (userService.findByEmail(email)!=null) {
+			User user = userService.findByEmail(email);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/delUser/{id}")
-	public ResponseEntity<String> delUserById(@PathVariable("id") int id) throws UserException {
-		userServiceInterface.delete(id);
+	@GetMapping("/deleteUser/{id}")
+	public ResponseEntity<String> deleteUserById(@PathVariable("id") int id) throws UserException {
+		userService.deleteUser(id);
 		return new ResponseEntity<String>("User Deleted", HttpStatus.OK);
 	}
 
 	@GetMapping("/getUserById/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") int id) throws UserException {
-		if (userServiceInterface.existsById(id)) {
-			User user = userServiceInterface.findById(id);
+		User user = userService.findById(id);
+		if (user != null) {
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -83,8 +90,9 @@ public class UserController {
 	@PutMapping("/updateFullName/{id}")
 	public ResponseEntity<User> updateFullName(@PathVariable("id") int id, @RequestBody User User)
 			throws UserException {
-		if (userServiceInterface.existsById(id)) {
-			userServiceInterface.updateFullName(User, id);
+		User user = userService.findById(id);
+		if (user != null) {	
+			userService.updateFullName(User, id);
 			return new ResponseEntity<User>(User, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -93,8 +101,9 @@ public class UserController {
 	@PutMapping("/updatePassword/{id}")
 	public ResponseEntity<User> updatePassword(@PathVariable("id") int id, @RequestBody User User)
 			throws UserException {
-		if (userServiceInterface.existsById(id)) {
-			userServiceInterface.updatePassword(User, id);
+		User user = userService.findById(id);
+		if (user != null) {
+			userService.updatePassword(User, id);
 			return new ResponseEntity<User>(User, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -103,8 +112,9 @@ public class UserController {
 	@PutMapping("/updatePhoneNumber/{id}")
 	public ResponseEntity<User> updatePhoneNumber(@PathVariable("id") int id, @RequestBody User User)
 			throws UserException {
-		if (userServiceInterface.existsById(id)) {
-			userServiceInterface.updatePhoneNumber(User, id);
+		User user = userService.findById(id);
+		if (user != null) {
+			userService.updatePhoneNumber(User, id);
 			return new ResponseEntity<User>(User, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -112,8 +122,9 @@ public class UserController {
 
 	@PutMapping("/updateUserToAdmin/{id}")
 	public ResponseEntity<User> updateUserToAdmin(@PathVariable("id") int id, User User) throws UserException {
-		if (userServiceInterface.existsById(id)) {
-			userServiceInterface.updateUserToAdmin(User, id);
+		User user = userService.findById(id);
+		if (user != null) {
+			userService.updateUserToAdmin(User, id);
 			return new ResponseEntity<User>(User, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -121,8 +132,9 @@ public class UserController {
 
 	@PutMapping("/updateToUser/{id}")
 	public ResponseEntity<User> updateToUser(@PathVariable("id") int id, User User) throws UserException {
-		if (userServiceInterface.existsById(id)) {
-			userServiceInterface.updateToUser(User, id);
+		User user = userService.findById(id);
+		if (user != null) {
+			userService.updateToUser(User, id);
 			return new ResponseEntity<User>(User, HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -130,8 +142,9 @@ public class UserController {
 
 	@PutMapping("/logout/{id}")
 	public ResponseEntity<String> logout(User user, @PathVariable("id") int id) throws UserException {
-		if (userServiceInterface.existsById(id)) {
-			userServiceInterface.logout(user, id);
+		User use = userService.findById(id);
+		if (use != null) {
+			userService.logout(user,id);
 			return new ResponseEntity<String>("Logged Out Successfully", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);

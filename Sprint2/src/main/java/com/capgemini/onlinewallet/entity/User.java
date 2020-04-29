@@ -11,7 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-
+/************************************************************************************
+ *          @author          Sohaib Khan
+ *          Description      It is a entity class that provides the entities for 
+ *                           user.
+ *          Version          1.0
+ *          Created Date     20-APR-2020
+ ************************************************************************************/
 @Entity
 @Table(name = "UserDetails")
 public class User {
