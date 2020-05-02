@@ -43,7 +43,7 @@ public class WalletTransactions {
 
 	@ManyToOne
 	@JoinColumn(name="accountid", referencedColumnName="accountid")
-	private WalletAccount walletAccount;//= new WalletAccount();
+	private WalletAccount walletAccount;
 	
 	public int getTransactionId() {
 		return transactionId;
@@ -110,6 +110,5 @@ public class WalletTransactions {
 	}
 
 
-	
 	
 }

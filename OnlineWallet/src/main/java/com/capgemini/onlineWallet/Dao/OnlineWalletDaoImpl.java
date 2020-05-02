@@ -1,6 +1,4 @@
 package com.capgemini.onlineWallet.Dao;
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -11,34 +9,29 @@ import com.capgemini.onlineWallet.Entities.WalletAccount;
 import com.capgemini.onlineWallet.Entities.WalletTransactions;
 import com.capgemini.onlineWallet.Entities.WalletUser;
 
-
-
-
 @Repository
 public class OnlineWalletDaoImpl implements OnlineWalletDao {
-	@Autowired
+	//@Autowired
 	 @PersistenceContext
 	EntityManager em;
-
 	
-	public OnlineWalletDaoImpl() {
-		// TODO Auto-generated constructor stub
-	}
+	
+	
 	@Override
-	public void persistUser(WalletUser user) {
-		em.persist(user);
-		
+	public void addUser(WalletUser user) {
+	em.persist(user);
 	}
+	
 	@Override
 	public void persistTransaction(WalletTransactions transaction) {
-	em.persist(transaction);
-		
+		em.merge(transaction);
 	}
+	
 	@Override
-	public void persistAccount(WalletAccount account) {
-		// TODO Auto-generated method stub
+	public void addAccount(WalletAccount account) {
 		em.persist(account);
 	}
+	
 	@Override
 	public WalletUser getUser(Integer userId) {
 		WalletUser user = em.find(WalletUser.class, userId);
@@ -56,14 +49,6 @@ public class OnlineWalletDaoImpl implements OnlineWalletDao {
 		return transaction;
 	}
 
-	
 
-	@Override
-	public void flush() {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	
-
 }
