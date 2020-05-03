@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.capgemini.onlinewallet.dto.UserDetails;
-
+/**********************Service Interface******************************/
 public interface UserDetailsService 
 {
 	public ResponseEntity<List<UserDetails>> showAllUsers();

@@ -1,7 +1,12 @@
 package com.capgemini.onlinewallet.exception;
 
 import lombok.Getter;
-
+/************************************************************************************
+ *          @author          Sharon Sony
+ *          Description      It is a exception class for user
+ *          Version          1.0
+ *          Created Date     24-APR-2020
+ ************************************************************************************/
 @Getter
 public class UserNotFoundException extends RuntimeException
 {

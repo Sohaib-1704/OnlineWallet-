@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.capgemini.onlinewallet.dto.UserDetails;
 import com.capgemini.onlinewallet.entity.User;
-
+/*****************Interface of User ********************/
 public interface UserDAO 
 {
 	public List<UserDetails> showAllUsers();

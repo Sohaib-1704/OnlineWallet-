@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /************************************************************************************
- *          @author          Sohaib Khan
+ *          @author          Sharon Sony
  *          Description      It is a entity class that provides the entities for 
  *                           transactions.
  *          Version          1.0

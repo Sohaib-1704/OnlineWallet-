@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.capgemini.onlinewallet.exception.UserNotFoundException;
 import com.capgemini.onlinewallet.exception.UserResponseEntity;
-
+/************************************************************************************
+ *          @author          Sharon Sony
+ *          Description      It is a rest controller advice class for exceptions
+ *          Version          1.0
+ *          Created Date     24-APR-2020
+ ************************************************************************************/
 @ControllerAdvice
 public class UserExceptionHandeller 
 {

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.capgemini.onlinewallet.dto.Transaction;
-
+/*****************Interface of passbook ********************/
 public interface TransactionDAO 
 {
 	public List<Transaction> getAllTransactions(int accountId);

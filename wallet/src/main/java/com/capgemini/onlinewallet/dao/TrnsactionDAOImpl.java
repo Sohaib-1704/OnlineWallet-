@@ -11,13 +11,24 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.onlinewallet.dto.Transaction;
 import com.capgemini.onlinewallet.entity.WalletTransaction;
-
+/************************************************************************************
+ *          @author          Sharon Sony
+ *          Description      It is a dao class that provides the methods to fetch 
+ *                            transaction data
+ *          Version          1.0
+ *          Created Date     20-APR-2020
+ ************************************************************************************/
 @Repository(value = "transactionDAO")
 public class TrnsactionDAOImpl implements TransactionDAO
 {
 	@Autowired
 	private EntityManager em;
-	
+	/************************************************************************************
+	 * Method:                        get all transactions
+	 * Description:                   To show all the transaction 
+	 * @param showalltransaction	  fetch the details
+	 * @returns                       returns the details 
+	 ************************************************************************************/
 	@Override
 	public List<Transaction> getAllTransactions(int accountId) 
 	{

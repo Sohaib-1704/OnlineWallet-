@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 /************************************************************************************
- *          @author          Sohaib Khan
+ *          @author          Sharon Sony
  *          Description      It is a entity class that provides the entities for 
  *                           wallet account.
  *          Version          1.0

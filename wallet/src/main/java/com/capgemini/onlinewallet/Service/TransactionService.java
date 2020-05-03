@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.capgemini.onlinewallet.dto.Transaction;
-
+/**********************Service Interface******************************/
 public interface TransactionService 
 {
 	public ResponseEntity<List<Transaction>> getAllTransactions(int accountId);

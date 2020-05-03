@@ -11,7 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.onlinewallet.dto.UserDetails;
 import com.capgemini.onlinewallet.entity.User;
-
+/************************************************************************************
+ *          @author          Sharon Sony
+ *          Description      It is a dao class that provides the methods to fetch 
+ *                           and update user data
+ *          Version          1.0
+ *          Created Date     20-APR-2020
+ ************************************************************************************/
 @Repository(value = "userDAO")
 public class UserDAOImpl implements UserDAO
 {
@@ -22,7 +28,12 @@ public class UserDAOImpl implements UserDAO
 		super();
 		this.em = em;
 	}
-
+	/************************************************************************************
+	 * Method:                        show all users
+	 * Description:                   To show all the Users 
+	 * @param showallusers			  fetch the details
+	 * @returns userDetails           returns the details 
+	 ************************************************************************************/
 	@Override
 	public List<UserDetails> showAllUsers() 
 	{
@@ -33,13 +44,23 @@ public class UserDAOImpl implements UserDAO
 		}
 		return userDetails;
 	}
-
+	/************************************************************************************
+	 * Method:                        find by id
+	 * Description:                   To find by id the Users 
+	 * @param findbyid				  fetch the details
+	 * @returns userdetails           returns the details 
+	 ************************************************************************************/
 	@Override
 	public User findById(int id)
 	{ 
 		return em.find(User.class, id);
 	}
-
+	/************************************************************************************
+	 * Method:                        update user details
+	 * Description:                   To show all the Users 
+	 * @param updateuserdetails		  update the details
+	 * @returns string                returns the details 
+	 ************************************************************************************/
 	@Override
 	public String updateUserDetails(UserDetails userDetails,int id) 
 	{
@@ -51,7 +72,12 @@ public class UserDAOImpl implements UserDAO
 		em.merge(user);
 		return "User updated";
 	}
-
+	/************************************************************************************
+	 * Method:                        delete
+	 * Description:                   To delete a User 
+	 * @param delete				  delete the details
+	 * @returns string                returns the details 
+	 ************************************************************************************/
 	@Override
 	public String delete(int id) 
 	{
