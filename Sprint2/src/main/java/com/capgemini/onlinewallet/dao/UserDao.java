@@ -14,7 +14,7 @@ public interface UserDao {
 
 	boolean findUserByEmail(String email);
 
-	User getUserByEmail(String email);
+	User getUserByEmail(String email) ;
 
 	boolean updateLoginStatus(User user, int id);
 
@@ -31,6 +31,8 @@ public interface UserDao {
 	boolean updateToUser(User user, int id);
 
 	List<User> getUserAndAdminDetails();
+
+	boolean updateUser(User user, int id);
 
 
 }

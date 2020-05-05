@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,20 +25,19 @@ import com.capgemini.onlinewallet.service.UserService;
 *          Version          1.0
 *          Created Date     22-APR-2020
 ************************************************************************************/
+@CrossOrigin
 @RestController
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 
-	@CrossOrigin
 	@PostMapping("/signUp")
 	public ResponseEntity<User> signUp(@RequestBody User user) throws UserException {
 		User use = userService.signUp(user);
 		return new ResponseEntity<User>(use, HttpStatus.OK);
 	}
-
-	@GetMapping("/login/{email}/{password}")
+	@PostMapping("/login/{email}/{password}")
 	public ResponseEntity<User> login(@PathVariable("email") String email, @PathVariable("password") String password)
 			throws UserException {
 		if (userService.findByEmail(email)!=null) {
@@ -46,8 +46,7 @@ public class UserController {
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
-
-	@GetMapping("/admin/{email}/{password}")
+	@PostMapping("/admin/{email}/{password}")
 	public ResponseEntity<User> admin(@PathVariable("email") String email, @PathVariable("password") String password)
 			throws UserException {
 		if (userService.findByEmail(email)!=null) {
@@ -56,13 +55,11 @@ public class UserController {
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
-
 	@GetMapping("/getAllUserDetails")
 	public ResponseEntity<List<User>> getAllUserDetails() {
 		List<User> lstUser = userService.getAllUsers();
 		return new ResponseEntity<List<User>>(lstUser, HttpStatus.OK);
 	}
-
 	@GetMapping("/getUserByEmail/{email}")
 	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) throws UserException {
 		if (userService.findByEmail(email)!=null) {
@@ -71,13 +68,11 @@ public class UserController {
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
-
-	@GetMapping("/deleteUser/{id}")
+	@DeleteMapping("/deleteUser/{id}")
 	public ResponseEntity<String> deleteUserById(@PathVariable("id") int id) throws UserException {
 		userService.deleteUser(id);
 		return new ResponseEntity<String>("User Deleted", HttpStatus.OK);
 	}
-
 	@GetMapping("/getUserById/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") int id) throws UserException {
 		User user = userService.findById(id);
@@ -86,7 +81,16 @@ public class UserController {
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
-
+	@PutMapping("/updateUser/{id}")
+	public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestBody User User)
+			throws UserException {
+		User user = userService.findById(id);
+		if (user != null) {	
+			userService.updateUser(user, id);
+			return new ResponseEntity<User>(User, HttpStatus.OK);
+		}
+		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+	}
 	@PutMapping("/updateFullName/{id}")
 	public ResponseEntity<User> updateFullName(@PathVariable("id") int id, @RequestBody User User)
 			throws UserException {

@@ -55,14 +55,14 @@ public class User {
 	};
 
 	@Enumerated(EnumType.STRING)
-	private type userType;
+	private type userType=type.user;
 
 	public enum login {
 		LoggedIn, LoggedOut
 	};
 
 	@Enumerated(EnumType.STRING)
-	private login loginStatus;
+	private login loginStatus=login.LoggedOut;
 
 	@OneToOne
 	@JoinColumn(name = "accountId", referencedColumnName = "accountId")

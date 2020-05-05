@@ -22,7 +22,7 @@ import javax.persistence.Table;
 
 public class WalletTransaction {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int transactionId;
 
 	@Column(name = "description", length = 100)

@@ -73,7 +73,7 @@ public class UserDaoImplementation implements UserDao {
 	
 	@Override
 	public User getUserByEmail(String email) {
-		String Qstr = "SELECT user.email FROM User user WHERE user.email= :email";
+		String Qstr = "SELECT user FROM User user WHERE user.email= :email";
 		TypedQuery<User> query = entityManager.createQuery(Qstr, User.class).setParameter("email", email);
 		return query.getSingleResult();
 	}
@@ -114,7 +114,17 @@ public class UserDaoImplementation implements UserDao {
 	 * @param updateToUser		  	  updates status to user
 	 * @returns true                  returns true 
 	 ************************************************************************************/
-	
+	@Override
+	public boolean updateUser(User user, int id) {
+		User userUpdate = entityManager.find(User.class, id);
+		userUpdate.setFirstname(user.getFirstname());
+		userUpdate.setLastname(user.getLastname());
+		userUpdate.setPassword(user.getPassword());
+		userUpdate.setConfirmPassword(user.getConfirmPassword());
+		userUpdate.setPhoneNumber(user.getPhoneNumber());
+		entityManager.persist(userUpdate);
+		return true;
+	}
 	@Override
 	public boolean updateFullName(User user, int id) {
 		User userUpdate = entityManager.find(User.class, id);
@@ -171,6 +181,7 @@ public class UserDaoImplementation implements UserDao {
 		entityManager.persist(userUpdate);
 		return true;
 	}
+	
 
 	@Override
 	public boolean updateLoginStatus(User user, int id) {

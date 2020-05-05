@@ -33,5 +33,7 @@ public interface UserService {
 
 	String updateToUser(User user, int id) throws UserException;
 
+	String updateUser(User user, int id) throws UserException;
+
 
 }

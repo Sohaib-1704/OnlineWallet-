@@ -51,7 +51,7 @@ public class UserServiceImplementation implements UserService {
 
 	/************************************************************************************
 	 * Method:					login 
-	 * Description: 			to login int the system by user or admin
+	 * Description: 			to login into the system by user or admin
 	 * @param loginUser:  		login for user
 	 * @param loginAdmin: 		login for admin
 	 * @returns user: 			returns the user
@@ -146,7 +146,14 @@ public class UserServiceImplementation implements UserService {
 	 * @param logout:            update the login status to logout
 	 * @returns exception:		 returns String value and exception
 	 ************************************************************************************/
-
+	
+	@Override
+	public String updateUser(User user, int id) throws UserException {
+		if (userDao.updateUser(user, id) == true)
+			return "User Details Updated";
+		else
+			throw new UserException("Error updating Name");
+	}
 	@Override
 	public String updateFullName(User user, int id) throws UserException {
 		if (userDao.updateFullName(user, id) == true)
