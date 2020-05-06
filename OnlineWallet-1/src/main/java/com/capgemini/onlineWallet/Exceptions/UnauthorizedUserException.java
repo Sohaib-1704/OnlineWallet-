@@ -6,8 +6,7 @@ package com.capgemini.onlineWallet.Exceptions;
  *          Created Date     24-APR-2020
  ************************************************************************************/
 
-public class UnauthorizedUserException extends RuntimeException  {
-
+public class UnauthorizedUserException extends RuntimeException {
 
 	public UnauthorizedUserException() {
 		// TODO Auto-generated constructor stub

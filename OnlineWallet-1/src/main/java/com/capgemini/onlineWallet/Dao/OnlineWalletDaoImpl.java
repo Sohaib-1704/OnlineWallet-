@@ -9,6 +9,12 @@ import com.capgemini.onlineWallet.Entities.User;
 import com.capgemini.onlineWallet.Entities.WalletAccount;
 import com.capgemini.onlineWallet.Entities.WalletTransaction;
 
+/***************************************************************************************************************
+* @author:       Aishwarya Srivastava                                                                          * 
+* Description:   It is a dao class which is used to access the data stored in our relational database.         *
+* Version :      1.0                                                                                           *
+* Created Date:  21-APR-2020                                                                                   *
+****************************************************************************************************************/
 
 @Repository
 public class OnlineWalletDaoImpl implements OnlineWalletDao {
