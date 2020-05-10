@@ -32,7 +32,7 @@ public class UserDetailsController
 		this.userService = userService;
 	}
 	
-	@GetMapping("/userdetails")
+	@GetMapping("/showuserdetails")
 	public ResponseEntity<List<UserDetails>> showAllUsers()
 	{
 		return userService.showAllUsers();
@@ -44,13 +44,13 @@ public class UserDetailsController
 		return userService.findById(id);
 	}
 	
-	@PutMapping("/userdetails/{id}")
+	@PutMapping("/updateuserdetails/{id}")
 	public ResponseEntity<String> updateUser(@RequestBody UserDetails userDetails,@PathVariable int id)
 	{
 		return userService.updateUserDetails(userDetails,id);
 	}
 	
-	@DeleteMapping("/userdetails/{id}")
+	@DeleteMapping("/deleteuserdetails/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable int id)
 	{
 		return userService.delete(id);
